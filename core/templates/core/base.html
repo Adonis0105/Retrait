@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facilitation des Retraits</title>
+    
+    {% load bootstrap4 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <style>
+        /* Styles généraux */
+        body {
+            padding-top: 60px; /* Décalage pour la navbar */
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin-top: 20px;
+        }
+
+        /* Navigation */
+        .navbar {
+            background-color: #007bff;
+            padding: 10px;
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .navbar-nav .nav-item .nav-link {
+            color: white !important;
+            font-size: 1.1rem;
+        }
+
+        .navbar-toggler {
+            border: none;
+        }
+
+        .navbar-toggler:focus {
+            outline: none;
+            box-shadow: none;
+        }
+
+        /* Contenu */
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 40px;
+            padding: 20px;
+            text-align: center;
+            background-color: #343a40;
+            color: white;
+            border-radius: 8px;
+        }
+
+        .footer a {
+            color: #ffc107;
+            margin: 0 10px;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+   
+    <div class="container">
+        <div class="header text-center mb-4"  style="margin-top: 10px;">
+            <h1 class="text-primary"  >Retraits</h1>
+            <p class="lead">MixxByYas et Moov Money Flooz</p>
+            <hr>
+        </div>
+        
+        {% block content %}
+        {% endblock %}
+
+        <!-- Footer amélioré -->
+        <footer class="footer">
+            <p>&copy; 2025 - Facilitation des Retraits</p>
+            <p>
+                <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+                <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
+                <a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a>
+            </p>
+        </footer>
+    </div>
+
+</body>
+</html>

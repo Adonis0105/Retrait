@@ -1,0 +1,21 @@
+<!-- agent/templates/agent/moov_form.html -->
+{% extends 'core/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <h2 class="text-center">Formulaire Agent Moov Money Flooz</h2>
+        
+        <form method="post" class="mt-4">
+            {% csrf_token %}
+            {{ form|crispy }}
+            
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary">Générer QR Code</button>
+                <a href="{% url 'agent:select_operator' %}" class="btn btn-secondary ml-2">Retour</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

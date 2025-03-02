@@ -1,0 +1,28 @@
+<!-- core/templates/core/operator_selection.html -->
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12 text-center">
+        <h2>Sélection de l'opérateur</h2>
+        <p>Veuillez sélectionner l'opérateur pour lequel vous travaillez :</p>
+        
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <a href="{% url 'agent:mixx_form' %}" class="btn btn-warning btn-lg btn-block btn-main">
+                    <i class="fas fa-building"></i> MixxByYas
+                </a>
+            </div>
+            <div class="col-md-6">
+                <a href="{% url 'agent:moov_form' %}" class="btn btn-info btn-lg btn-block btn-main">
+                    <i class="fas fa-building"></i> Moov Money Flooz
+                </a>
+            </div>
+        </div>
+        
+        <div class="mt-4">
+            <a href="{% url 'core:home' %}" class="btn btn-secondary">Retour à l'accueil</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

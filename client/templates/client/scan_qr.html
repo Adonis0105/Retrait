@@ -1,0 +1,55 @@
+<!-- client/templates/client/scan_qr.html -->
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 offset-md-2 text-center">
+        <h2>Scanner le QR code</h2>
+        
+        <div class="alert alert-info mt-3">
+            <p>Veuillez scanner le QR code fourni par l'agent pour continuer.</p>
+            <p>Assurez-vous que votre appareil dispose d'une caméra fonctionnelle.</p>
+        </div>
+        
+        <div class="mt-4">
+            <div id="qr-scanner" style="width: 100%; max-width: 500px; margin: 0 auto;">
+                <video id="scanner-video" style="width: 100%; border: 2px solid #333;"></video>
+            </div>
+            
+            <div class="mt-3">
+                <button id="start-scan" class="btn btn-primary">Démarrer la caméra</button>
+                <a href="{% url 'core:home' %}" class="btn btn-secondary ml-2">Retour à l'accueil</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://unpkg.com/html5-qrcode@2.0.9/dist/html5-qrcode.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const html5QrCode = new Html5Qrcode("qr-scanner");
+        const qrCodeSuccessCallback = (decodedText, decodedResult) => {
+            // Arrêter le scanner
+            html5QrCode.stop();
+            
+            // Redirection vers l'URL décodée
+            window.location.href = decodedText;
+        };
+        
+        const config = { fps: 10, qrbox: { width: 250, height: 250 } };
+        
+        document.getElementById('start-scan').addEventListener('click', function() {
+            html5QrCode.start(
+                { facingMode: "environment" },
+                config,
+                qrCodeSuccessCallback
+            ).catch((err) => {
+                console.error(`QR Code Scanner initialization error: ${err}`);
+                alert("Erreur d'initialisation de la caméra. Veuillez vérifier vos autorisations.");
+            });
+            this.disabled = true;
+            this.textContent = 'Scanner en cours...';
+        });
+    });
+</script>
+{% endblock %}

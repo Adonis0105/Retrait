@@ -1,0 +1,26 @@
+<!-- client/templates/client/mixx_form.html -->
+{% extends 'core/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <h2 class="text-center">Formulaire Client MixxByYas</h2>
+        
+        <div class="alert alert-info mt-3">
+            <p>Numéro d'agent: <strong>{{ agent_number }}</strong></p>
+            <p>Veuillez remplir les informations ci-dessous pour générer votre code de retrait.</p>
+        </div>
+        
+        <form method="post" class="mt-4">
+            {% csrf_token %}
+            {{ form|crispy }}
+            
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary">Générer le code de retrait</button>
+                <a href="{% url 'client:scan' %}" class="btn btn-secondary ml-2">Retour</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
