@@ -5,20 +5,28 @@
 {% block content %}
 <div class="row">
     <div class="col-md-8 offset-md-2">
-        <h2 class="text-center">Formulaire Client MixxByYas</h2>
-        
-        <div class="alert alert-info mt-3">
+        <h2 class="text-center">MixxByYas - Code de retrait</h2>
+
+        <div class="alert alert-info mt-3 text-center">
             <p>Numéro d'agent: <strong>{{ agent_number }}</strong></p>
-            <p>Veuillez remplir les informations ci-dessous pour générer votre code de retrait.</p>
+            <p>Veuillez entrer le montant et votre code personnel.</p>
         </div>
-        
-        <form method="post" class="mt-4">
+
+        <form method="post" class="mt-4 text-center">
             {% csrf_token %}
             {{ form|crispy }}
-            
-            <div class="text-center mt-4">
-                <button type="submit" class="btn btn-primary">Générer le code de retrait</button>
-                <a href="{% url 'client:scan' %}" class="btn btn-secondary ml-2">Retour</a>
+
+            <div class="mt-4">
+                {% if transaction_code %}
+                    <a href="tel:{{ transaction_code }}" class="btn btn-primary btn-lg">
+                        Composer ce code
+                    </a>
+                {% else %}
+                    <button type="submit" class="btn btn-success btn-lg">
+                        Générer le code
+                    </button>
+                {% endif %}
+                <a href="{% url 'client:scan' %}" class="btn btn-secondary btn-lg ml-2">Retour</a>
             </div>
         </form>
     </div>

@@ -87,15 +87,13 @@ class MoovAgentFormView(View):
     def post(self, request):
         form = MoovAgentForm(request.POST)
         if form.is_valid():
-            client_number = form.cleaned_data['client_number']
-            amount = form.cleaned_data['amount']
+            
             agent_number = form.cleaned_data['agent_number']
             
             # Création des données à encoder dans le QR
             data = {
                 'operator': 'moov',
-                'client_number': client_number,
-                'amount': str(amount),
+                
                 'agent_number': agent_number
             }
             
@@ -109,7 +107,7 @@ class MoovAgentFormView(View):
             
             # Création d'une URL avec les paramètres
             base_url = request.build_absolute_uri(reverse('client:process_moov'))
-            url_params = f"?client_number={client_number}&amount={amount}&agent_number={agent_number}"
+            url_params = f"?&agent_number={agent_number}"
             qr_data = f"{base_url}{url_params}"
             
             qr.add_data(qr_data)
@@ -126,7 +124,7 @@ class MoovAgentFormView(View):
             img_str = base64.b64encode(buffer.getvalue()).decode('ascii')
             
             # Sauvegarde en DB
-            media_path = f'qrcodes/moov_{client_number}_{amount}.png'
+            media_path = f'qrcodes/moov_{agent_number}.png'
             full_path = os.path.join(settings.MEDIA_ROOT, 'qrcodes')
             os.makedirs(full_path, exist_ok=True)
             
